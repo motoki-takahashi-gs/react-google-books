@@ -11,3 +11,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.flex {
+  display: flex;
+}
+
+.flex img {
+  max-width: 130px;
+}
+
+.flex > div {
+  padding: 10px 20px;
+}
+
+.flex > div > div {
+  padding: 10px 0;
+}
+
+li {
+  padding: 5px 0;
+}
+
+.book li {
+  padding: 15px;
+}
+
+.book li:nth-child(odd) {
+  background-color: rgb(198, 237, 252);
+}
+
+.book {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
