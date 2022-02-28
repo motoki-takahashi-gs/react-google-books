@@ -1,5 +1,7 @@
 # React app with Google Books APIs
 
-URL: https://vibrant-easley-d8351e.netlify.app/
+https://react-google-books-2022.herokuapp.com/
 
-Google Books APIs にリクエストを送り、「React」「Vue」「Angular」、それぞれのキーワードに合致する検索結果を表示させるだけの React で作られたウェブアプリです。
+This web service shows a result of books with keywords like React, Vue, Angular, etc. using Google Books APIs. It's made with React for frontend.
+
+Google Books APIs を使って「React」「Vue」「Angular」などのキーワードに合致する本の一覧を表示させるウェブアプリです。フロントエンドは React を使って作られています。
