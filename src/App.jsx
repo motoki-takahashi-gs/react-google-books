@@ -1,58 +1,47 @@
 import React from 'react';
 import Booklist from './components/Booklist';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import Axios from 'axios';
 import './index.css';
+import Navigation from './components/Navigation';
 
-const App = () => {
-  const languages = ['React', 'Vue', 'Angular'];
+const App = ({ title }) => {
+
+  const languages = ['React', 'Vue', 'Angular', 'Ruby', 'Python', 'Laravel', 'Flutter', 'Firebase', 'Node.js'];
+
   const getDataFromAPI = async keyword => {
     const requestUrl = 'https://www.googleapis.com/books/v1/volumes?q=intitle:'
     const result = await Axios.get(`${requestUrl}${keyword}`);
     return result;
   }
+
+  const routeNavigation = languages.map(language => {
+    const id = language.toLowerCase()
+    return <Route
+      path={`/${id}`}
+      element={
+        <Booklist
+          language={language}
+          getData={keyword => getDataFromAPI(keyword)}
+        />
+      }
+      key={id}
+    />
+  })
+
   return (
-    <BrowserRouter>
-      <div>
-        <h1>react app</h1>
-        <ul>
-          <li><Link to='/'>React</Link></li>
-          <li><Link to='/vue'>Vue</Link></li>
-          <li><Link to='/angular'>Angular</Link></li>
-        </ul>
-        <Route
-          exact
-          path='/'
-          render={
-            props =>
-              <Booklist
-                language={languages[0]}
-                getData={keyword => getDataFromAPI(keyword)}
-              />
-          }
-        />
-        <Route
-          path='/vue'
-          render={
-            props =>
-              <Booklist
-                language={languages[1]}
-                getData={keyword => getDataFromAPI(keyword)}
-              />
-          }
-        />
-        <Route
-          path='/angular'
-          render={
-            props =>
-              <Booklist
-                language={languages[2]}
-                getData={keyword => getDataFromAPI(keyword)}
-              />
-          }
-        />
-      </div>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <h1 className='app-title'>
+          <Link to={'/'}>{title}</Link>
+        </h1>
+        <Navigation languages={languages} />
+        <Routes>
+          <Route path='/' element='Homepage' />
+          {routeNavigation}
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

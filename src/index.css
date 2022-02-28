@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 2em;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -7,9 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.app-title {
+  margin: 0.5em;
+}
+
+.app-title > a {
+  text-decoration: none;
 }
 
 .flex {
@@ -44,4 +47,12 @@ li {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+.nav-bar {
+  margin-bottom: 1em;
+}
+
+.nav-button {
+  margin: 0.5em;
 }

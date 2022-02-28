@@ -4,7 +4,7 @@ const Booklist = props => {
     const [bookData, setBookData] = useState(null);
 
     useEffect(() => {
-        const result = props.getData?.(props.language).then(response => setBookData(response));
+        props.getData?.(props.language).then(response => setBookData(response));
     }, [props])
 
     console.log(bookData);
@@ -23,7 +23,7 @@ const Booklist = props => {
                                 </div>
                                 <div className="flex">
                                     <div>
-                                        <a href={x.volumeInfo.infoLink} target="_blank">
+                                        <a href={x.volumeInfo.infoLink} target="_blank" rel='noreferrer'>
                                             <img src={
                                                 x.volumeInfo.imageLinks === undefined
                                                     ? "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
@@ -33,7 +33,7 @@ const Booklist = props => {
                                     </div>
                                     <div>
                                         <div>
-                                            著者：{x.volumeInfo.authors + ""}
+                                            著者：{x.volumeInfo.authors}
                                         </div>
                                         <div>
                                             出版社：{x.volumeInfo.publisher}
@@ -46,7 +46,7 @@ const Booklist = props => {
                             </li>)
                 }
             </ul>
-        </div >
+        </div>
     );
 }
 
