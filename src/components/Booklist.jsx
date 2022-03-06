@@ -4,47 +4,36 @@ const Booklist = props => {
     const [bookData, setBookData] = useState(null);
 
     useEffect(() => {
-        props.getData?.(props.language).then(response => setBookData(response));
+        props.language === ''
+            ? setBookData('') // in order to not show "now loading..." in top page (default formData is '')
+            : props.getData?.(props.language).then(response => setBookData(response));
     }, [props])
 
-    console.log(bookData);
-
     return (
-        <div>
+        <div className='book-list'>
             <ul className="book">
-                {
-                    bookData === null
-                        ? <p>now loading...</p>
-                        : bookData.data.items.map((x, index) =>
-
-                            <li key={index} >
+                {bookData === null
+                    ? <p>now loading...</p>
+                    : bookData?.data?.items?.map((book, index) => // question mark is called Optional Chaining
+                        <li key={index} >
+                            <div>{book.volumeInfo.title}</div>
+                            <div className="flex">
                                 <div>
-                                    {x.volumeInfo.title}
+                                    <a href={book.volumeInfo.infoLink} target="_blank" rel='noreferrer'>
+                                        <img src={
+                                            book.volumeInfo.imageLinks === undefined
+                                                ? "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+                                                : book.volumeInfo.imageLinks?.thumbnail
+                                        } alt="" />
+                                    </a>
                                 </div>
-                                <div className="flex">
-                                    <div>
-                                        <a href={x.volumeInfo.infoLink} target="_blank" rel='noreferrer'>
-                                            <img src={
-                                                x.volumeInfo.imageLinks === undefined
-                                                    ? "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
-                                                    : x.volumeInfo.imageLinks?.thumbnail
-                                            } alt="" />
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <div>
-                                            著者：{x.volumeInfo.authors}
-                                        </div>
-                                        <div>
-                                            出版社：{x.volumeInfo.publisher}
-                                        </div>
-                                        <div>
-                                            出版日：{x.volumeInfo.publishedDate}
-                                        </div>
-                                    </div>
+                                <div>
+                                    <div>著者: {book.volumeInfo.authors}</div>
+                                    <div>出版社: {book.volumeInfo.publisher}</div>
+                                    <div>出版日: {book.volumeInfo.publishedDate}</div>
                                 </div>
-                            </li>)
-                }
+                            </div>
+                        </li>)}
             </ul>
         </div>
     );

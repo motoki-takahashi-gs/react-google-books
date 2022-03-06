@@ -5,10 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
 }
 
 .app-title {
   margin: 0.5em;
+  text-align: center;
 }
 
 .app-title > a {
@@ -50,9 +53,15 @@ li {
 }
 
 .nav-bar {
-  margin-bottom: 1em;
+  margin: 1em;
 }
 
 .nav-button {
   margin: 0.5em;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
 }

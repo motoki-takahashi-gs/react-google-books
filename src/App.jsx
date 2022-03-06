@@ -4,12 +4,23 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import Axios from 'axios';
 import './index.css';
 import Navigation from './components/Navigation';
+import TopPage from './components/TopPage';
 
 const App = ({ title }) => {
 
-  const languages = ['React', 'Vue', 'Angular', 'Ruby', 'Python', 'Laravel', 'Flutter', 'Firebase', 'Node.js'];
+  const languages = [
+    '', 'React', 'Vue', 'Angular', 'Ruby', 'Python', 'Laravel', 'Flutter', 'Firebase', 'Node.js'
+  ];
 
-  const getDataFromAPI = async keyword => {
+  const [formData, setFormData] = React.useState('')
+  console.log(formData)
+
+  const handleChange = (event) => {
+    const { value } = event.target
+    setFormData(value)
+  }
+
+  const getData = async keyword => {
     const requestUrl = 'https://www.googleapis.com/books/v1/volumes?q=intitle:'
     const result = await Axios.get(`${requestUrl}${keyword}`);
     return result;
@@ -20,10 +31,16 @@ const App = ({ title }) => {
     return <Route
       path={`/${id}`}
       element={
-        <Booklist
-          language={language}
-          getData={keyword => getDataFromAPI(keyword)}
-        />
+        id === ''
+          ? <TopPage
+            handleChange={handleChange}
+            formData={formData}
+            getData={keyword => getData(keyword)}
+          />
+          : <Booklist
+            language={language}
+            getData={keyword => getData(keyword)}
+          />
       }
       key={id}
     />
@@ -37,7 +54,6 @@ const App = ({ title }) => {
         </h1>
         <Navigation languages={languages} />
         <Routes>
-          <Route path='/' element='Homepage' />
           {routeNavigation}
         </Routes>
       </BrowserRouter>

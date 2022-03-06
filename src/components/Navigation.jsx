@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ButtonGroup, ListGroup, ListGroupItem, NavItem } from 'react-bootstrap';
 
 const Navigation = ({ languages }) => {
 
     const list = languages.map(language => {
+        if (language === '') return ''
         const id = language.toLowerCase()
         const elm =
             <Link to={`/${id}`} key={id}>
